@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+    cleanarchitecturedb:
+        image: postgres:17.2
+
+    cleanarchitectureapi:
+        image: ${DOCKEr_REGISTRY-}cleanarchitectureapi
+        build:
+            context: .
+            dockerfile: src/CleanArchitecture/CleanArchitecture.Api/Dockerfile
+
+    serilogseq:
+        image: datalust/seq:2024.3
+        
