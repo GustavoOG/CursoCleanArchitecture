@@ -1,4 +1,6 @@
-﻿using CleanArchitecture.Application.Users.GetusersDapperPagination;
+﻿using Asp.Versioning;
+using CleanArchitecture.Api.Utils;
+using CleanArchitecture.Application.Users.GetusersDapperPagination;
 using CleanArchitecture.Application.Users.GetUsersPagination;
 using CleanArchitecture.Application.Users.LoginUser;
 using CleanArchitecture.Application.Users.RegisterUser;
@@ -11,8 +13,10 @@ using System.Net;
 
 namespace CleanArchitecture.Api.Controllers.Users
 {
-    [Route("api/Users")]
     [ApiController]
+    [ApiVersion(ApiVersions.V1)]
+    //[ApiVersion(ApiVersions.V2)]
+    [Route("api/v{version:apiVersion}/Users")]
     public class UsersController : ControllerBase
     {
         private readonly ISender _sender;
@@ -24,15 +28,27 @@ namespace CleanArchitecture.Api.Controllers.Users
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserRequest request, CancellationToken cancellationToken)
+        [MapToApiVersion(ApiVersions.V1)]
+        public async Task<IActionResult> LoginV1([FromBody] LoginUserRequest request, CancellationToken cancellationToken)
         {
-
             var command = new LoginCommand(request.Email, request.Password);
             var result = await _sender.Send(command, cancellationToken);
             return result.IsSuccess
                 ? Ok(result.Value)
                 : Unauthorized(result.Error);
         }
+
+        //[AllowAnonymous]
+        //[HttpPost("login")]
+        //[MapToApiVersion(ApiVersions.V2)]
+        //public async Task<IActionResult> LoginV2([FromBody] LoginUserRequest request, CancellationToken cancellationToken)
+        //{
+        //    var command = new LoginCommand(request.Email, request.Password);
+        //    var result = await _sender.Send(command, cancellationToken);
+        //    return result.IsSuccess
+        //        ? Ok(result.Value)
+        //        : Unauthorized(result.Error);
+        //}
 
         [AllowAnonymous]
         [HttpPost("register")]
@@ -49,8 +65,8 @@ namespace CleanArchitecture.Api.Controllers.Users
 
         [AllowAnonymous]
         [HttpGet("getPagination", Name = "PaginationUsers")]
-        [ProducesResponseType(typeof(PaginationResult<User, UserId>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<PaginationResult<User, UserId>>> GetPaginationUsers
+        [ProducesResponseType(typeof(PagedResults<User, UserId>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<PagedResults<User, UserId>>> GetPaginationUsers
             ([FromQuery] GetUsersPaginationQuery request)
         {
             var resultados = await _sender.Send(request);
