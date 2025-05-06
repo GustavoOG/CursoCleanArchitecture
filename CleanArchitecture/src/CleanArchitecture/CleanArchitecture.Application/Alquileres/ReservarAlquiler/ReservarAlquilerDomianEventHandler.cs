@@ -1,6 +1,6 @@
 ﻿using CleanArchitecture.Application.Abstractions.Email;
-using CleanArchitecture.Domain.Alquieres;
-using CleanArchitecture.Domain.Alquieres.Events;
+using CleanArchitecture.Domain.Alquileres;
+using CleanArchitecture.Domain.Alquileres.Events;
 using CleanArchitecture.Domain.Users;
 using MediatR;
 

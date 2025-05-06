@@ -22,7 +22,7 @@ namespace CleanArchitecture.Infraestructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CleanArchitecture.Domain.Alquieres.Alquiler", b =>
+            modelBuilder.Entity("CleanArchitecture.Domain.Alquileres.Alquiler", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
@@ -336,7 +336,7 @@ namespace CleanArchitecture.Infraestructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("ocurred_on_utc");
 
-                    b.Property<DateTime>("ProcessedOnUtc")
+                    b.Property<DateTime?>("ProcessedOnUtc")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("processed_on_utc");
 
@@ -351,7 +351,7 @@ namespace CleanArchitecture.Infraestructure.Migrations
                     b.ToTable("outbox_messages", (string)null);
                 });
 
-            modelBuilder.Entity("CleanArchitecture.Domain.Alquieres.Alquiler", b =>
+            modelBuilder.Entity("CleanArchitecture.Domain.Alquileres.Alquiler", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Users.User", null)
                         .WithMany()
@@ -459,7 +459,7 @@ namespace CleanArchitecture.Infraestructure.Migrations
                                 .HasConstraintName("fk_alquileres_alquileres_id");
                         });
 
-                    b.OwnsOne("CleanArchitecture.Domain.Alquieres.DateRange", "Duracion", b1 =>
+                    b.OwnsOne("CleanArchitecture.Domain.Alquileres.DateRange", "Duracion", b1 =>
                         {
                             b1.Property<Guid>("AlquilerId")
                                 .HasColumnType("uuid")
@@ -495,7 +495,7 @@ namespace CleanArchitecture.Infraestructure.Migrations
 
             modelBuilder.Entity("CleanArchitecture.Domain.Reviews.Review", b =>
                 {
-                    b.HasOne("CleanArchitecture.Domain.Alquieres.Alquiler", null)
+                    b.HasOne("CleanArchitecture.Domain.Alquileres.Alquiler", null)
                         .WithMany()
                         .HasForeignKey("AlguilerId")
                         .HasConstraintName("fk_reviews_alquileres_alguiler_id");

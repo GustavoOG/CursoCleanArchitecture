@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Domain.Alquieres;
+﻿using CleanArchitecture.Domain.Alquileres;
 using CleanArchitecture.Domain.Reviews;
 using CleanArchitecture.Domain.Users;
 using CleanArchitecture.Domain.Vehiculos;

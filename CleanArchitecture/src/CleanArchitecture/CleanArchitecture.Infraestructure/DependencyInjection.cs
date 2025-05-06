@@ -4,7 +4,7 @@ using CleanArchitecture.Application.Abstractions.Data;
 using CleanArchitecture.Application.Abstractions.Email;
 using CleanArchitecture.Application.Paginations;
 using CleanArchitecture.Domain.Abstractions;
-using CleanArchitecture.Domain.Alquieres;
+using CleanArchitecture.Domain.Alquileres;
 using CleanArchitecture.Domain.Users;
 using CleanArchitecture.Domain.Vehiculos;
 using CleanArchitecture.Infraestructure.Clock;

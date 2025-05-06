@@ -7,28 +7,33 @@ namespace CleanArchitecture.Application.Alquileres.GetAlquiler
 {
     internal sealed class GetAlquilerQueryHandler : IQueryHandler<GetAlquilerQuery, AlquilerResponse>
     {
-        private readonly ISqlConnectionFactory? sqlConnectionFactory;
+        private readonly ISqlConnectionFactory _sqlConnectionFactory;
+
+        public GetAlquilerQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
+        {
+            _sqlConnectionFactory = sqlConnectionFactory;
+        }
         public async Task<Result<AlquilerResponse>> Handle(GetAlquilerQuery request, CancellationToken cancellationToken)
         {
-            using var connection = sqlConnectionFactory!.CreateConnection();
+            using var connection = _sqlConnectionFactory.CreateConnection();
             const string sql = """
-                                Select
-                                id as Id,
-                                vehiculo_Id as VahiculoId,
-                                user_id as UserId,
-                                status as Status,
-                                precio_por_periodo as PrecioAlquiler,
-                                precio_por_periodo_tipo_moneda as TipoMonedaAlquiler, 
-                                precio_mantenimiento as PrecioMantenimiento, 
-                                precio_manteniminto_tipo_moneda as TipoMonedaMantenimiento, 
-                                precio_accesorios as AccesoriosPrecio,
-                                precio_accesorios_tipo_mondea as TipoMonedaAccesorios, 
-                                precio_total as PrecioTotal, 
-                                precio_total_tipo_moneda as PrecioTotalTipoMoneda, 
-                                duracion_inicio as DuracionInicio, 
-                                duracion_final as DuracionFinal, 
-                                fecha_creacion as  FechaCreacion 
-                                from alquileres where id = @AlquilerId
+                                SELECT
+                                     id AS Id,
+                                     vehiculo_id AS VehiculoId,
+                                     user_id AS UserId,
+                                     status AS Status,
+                                     precio_por_pediodo_monto AS PrecioAlquiler,
+                                precio_por_pediodo_tipo_moneda AS TipoMonedaAlquiler,
+                                     mantenimiento_monto AS PrecioMantenimiento,
+                                     mantenimiento_tipo_moneda AS TipoMonedaMantenimiento,
+                                     accesorios_monto AS AccesoriosPrecio,
+                                     accesorios_tipo_moneda AS TipoMonedaAccesorio,
+                                     precio_total_monto AS PrecioTotal,
+                                     precio_total_tipo_moneda AS PrecioTotalTipoMoneda,
+                                     duracion_inicio AS DuracionInicio,
+                                     duracion_fin AS DuracionFinal,
+                                     fecha_creacion AS FechaCreacion
+                                FROM alquileres WHERE id=@AlquilerId  
                                 """;
             var alquiler = await connection.QueryFirstOrDefaultAsync<AlquilerResponse>(
                             sql,

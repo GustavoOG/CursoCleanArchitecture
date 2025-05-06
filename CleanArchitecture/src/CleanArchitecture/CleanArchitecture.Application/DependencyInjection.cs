@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.Abstractions.Behaviors;
-using CleanArchitecture.Domain.Alquieres;
+using CleanArchitecture.Domain.Alquileres;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 

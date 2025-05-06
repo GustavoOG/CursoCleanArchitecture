@@ -1,7 +1,7 @@
 ﻿using CleanArchitecture.Application.Abstractions.Data;
 using CleanArchitecture.Application.Abstranctions.Messaging;
 using CleanArchitecture.Domain.Abstractions;
-using CleanArchitecture.Domain.Alquieres;
+using CleanArchitecture.Domain.Alquileres;
 using Dapper;
 
 namespace CleanArchitecture.Application.Vehiculos.SearchVehiculos
