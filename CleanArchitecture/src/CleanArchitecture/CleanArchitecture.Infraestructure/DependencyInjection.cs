@@ -10,11 +10,13 @@ using CleanArchitecture.Domain.Vehiculos;
 using CleanArchitecture.Infraestructure.Clock;
 using CleanArchitecture.Infraestructure.Data;
 using CleanArchitecture.Infraestructure.Email;
+using CleanArchitecture.Infraestructure.Outbox;
 using CleanArchitecture.Infraestructure.Repositories;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Quartz;
 
 namespace CleanArchitecture.Infraestructure
 {
@@ -23,6 +25,11 @@ namespace CleanArchitecture.Infraestructure
         public static IServiceCollection AddInfraestructure(this IServiceCollection services, IConfiguration configuration)
         {
 
+            services.Configure<OutboxOptions>(configuration.GetSection("Outbox"));
+            services.AddQuartz();
+            services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+            services.ConfigureOptions<ProcessOutboxMessageSetup>();
             services.AddApiVersioning(options =>
             {
                 options.DefaultApiVersion = new ApiVersion(1, 0);
