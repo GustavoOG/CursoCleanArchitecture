@@ -6,8 +6,9 @@ using CleanArchitecture.Api.Extensions;
 using CleanArchitecture.Api.OptionsSetup;
 using CleanArchitecture.Application;
 using CleanArchitecture.Application.Abstractions.Authentication;
-using CleanArchitecture.Infraestructure;
-using CleanArchitecture.Infraestructure.Authentication;
+using CleanArchitecture.Infrastructure;
+using CleanArchitecture.Infrastructure.Authentication;
+using CleanArchitecture.Infrastructure.Email;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Serilog;
@@ -26,7 +27,11 @@ builder.Services.AddControllers();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer();
 
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
 builder.Services.ConfigureOptions<JwtOptionsSetup>();
+builder.Services.Configure<GmailSettings>(builder.Configuration.GetSection("GmailSettings"));
+
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 builder.Services.AddTransient<IJwtProvider, JwtProvider>();
 
@@ -42,7 +47,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddApplication();
-builder.Services.AddInfraestructure(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
@@ -89,4 +94,6 @@ var routeGroupBuilder = app.MapGroup("api/v{version:apiVersion}").WithApiVersion
 routeGroupBuilder.MapAlquilerEndpoints();
 
 app.Run();
+
+public partial class Program;
 

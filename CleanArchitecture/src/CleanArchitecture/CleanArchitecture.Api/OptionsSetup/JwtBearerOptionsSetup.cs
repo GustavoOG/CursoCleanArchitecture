@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Infraestructure.Authentication;
+﻿using CleanArchitecture.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

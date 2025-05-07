@@ -33,7 +33,7 @@ namespace CleanArchitecture.Application.Alquileres.ReservarAlquiler
                 return;
             }
 
-            await _emailService.SendAsync(user.Email!, "Alquiler Reservado",
+            _emailService.Send(user.Email!.Value, "Alquiler Reservado",
                 $"Por Favor confirma tu reserva, Id de la reservacion: {alquiler.Id}");
         }
     }

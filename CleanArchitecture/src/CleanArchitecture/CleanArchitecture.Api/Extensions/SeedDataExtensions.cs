@@ -2,7 +2,7 @@
 using CleanArchitecture.Application.Abstractions.Data;
 using CleanArchitecture.Domain.Users;
 using CleanArchitecture.Domain.Vehiculos;
-using CleanArchitecture.Infraestructure;
+using CleanArchitecture.Infrastructure;
 using Dapper;
 
 namespace CleanArchitecture.Api.Extensions

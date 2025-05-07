@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.Abstractions.Data;
-using CleanArchitecture.Application.Abstranctions.Messaging;
+using CleanArchitecture.Application.Abstractions.Messaging;
 using CleanArchitecture.Domain.Abstractions;
 using CleanArchitecture.Domain.Alquileres;
 using Dapper;

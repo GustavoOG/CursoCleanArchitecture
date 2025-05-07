@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Application.Abstranctions.Messaging;
+﻿using CleanArchitecture.Application.Abstractions.Messaging;
 using CleanArchitecture.Application.Paginations;
 using CleanArchitecture.Domain.Abstractions;
 using CleanArchitecture.Domain.Users;

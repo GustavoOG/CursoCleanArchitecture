@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Application.Abstranctions.Messaging;
+﻿using CleanArchitecture.Application.Abstractions.Messaging;
 
 namespace CleanArchitecture.Application.Vehiculos.SearchVehiculos
 {

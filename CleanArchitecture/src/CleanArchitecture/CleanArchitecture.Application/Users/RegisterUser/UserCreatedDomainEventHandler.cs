@@ -23,10 +23,10 @@ namespace CleanArchitecture.Application.Users.RegisterUser
             {
                 return;
             }
-            await _emailService.SendAsync(
-                user.Email!, "Se ha creado su cuenta en nuestra app",
-                "Tienes una nueva cuenta en clean architecture"
-                );
+            _emailService.Send(
+               user.Email!.Value, "Se ha creado su cuenta en nuestra app",
+               "Tienes una nueva cuenta en clean architecture"
+               );
         }
     }
 }

@@ -7,7 +7,7 @@ WORKDIR /src
 
 COPY ["src/CleanArchitecture/CleanArchitecture.Domain/CleanArchitecture.Domain.csproj", "src/CleanArchitecture/CleanArchitecture.Domain/"]
 COPY ["src/CleanArchitecture/CleanArchitecture.Application/CleanArchitecture.Application.csproj", "src/CleanArchitecture/CleanArchitecture.Application/"]
-COPY ["src/CleanArchitecture/CleanArchitecture.Infraestructure/CleanArchitecture.Infraestructure.csproj", "src/CleanArchitecture/CleanArchitecture.Infraestructure/"]
+COPY ["src/CleanArchitecture/CleanArchitecture.Infrastructure/CleanArchitecture.Infrastructure.csproj", "src/CleanArchitecture/CleanArchitecture.Infrastructure/"]
 COPY ["src/CleanArchitecture/CleanArchitecture.Api/CleanArchitecture.Api.csproj", "src/CleanArchitecture/CleanArchitecture.Api/"]
 RUN dotnet restore "src/CleanArchitecture/CleanArchitecture.Api/CleanArchitecture.Api.csproj"
 COPY . .

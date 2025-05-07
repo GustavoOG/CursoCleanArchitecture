@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Infraestructure.Authentication;
+﻿using CleanArchitecture.Infrastructure.Authentication;
 using Microsoft.Extensions.Options;
 
 namespace CleanArchitecture.Api.OptionsSetup

@@ -1,11 +1,13 @@
 ﻿using Asp.Versioning;
 using CleanArchitecture.Api.Utils;
 using CleanArchitecture.Application.Users.GetusersDapperPagination;
+using CleanArchitecture.Application.Users.GetUserSession;
 using CleanArchitecture.Application.Users.GetUsersPagination;
 using CleanArchitecture.Application.Users.LoginUser;
 using CleanArchitecture.Application.Users.RegisterUser;
 using CleanArchitecture.Domain.Abstractions;
 using CleanArchitecture.Domain.Users;
+using CleanArchitecture.Infrastructure.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,17 @@ namespace CleanArchitecture.Api.Controllers.Users
             _sender = sender;
         }
 
+
+        [HttpGet("me")]
+        [HashPermission(Domain.Permissions.PermissionEnum.ReadUser)]
+        public async Task<IActionResult> GetUserMe
+            (CancellationToken cancellationToken)
+        {
+            var query = new GetUserSessionQuery();
+            var resultado = await _sender.Send(query, cancellationToken);
+            return Ok(resultado.Value);
+        }
+
         [AllowAnonymous]
         [HttpPost("login")]
         [MapToApiVersion(ApiVersions.V1)]
@@ -33,9 +46,12 @@ namespace CleanArchitecture.Api.Controllers.Users
         {
             var command = new LoginCommand(request.Email, request.Password);
             var result = await _sender.Send(command, cancellationToken);
-            return result.IsSuccess
-                ? Ok(result.Value)
-                : Unauthorized(result.Error);
+            if (result.IsFailure)
+            {
+                return Unauthorized(result.Error);
+            }
+
+            return Ok(result.Value);
         }
 
         //[AllowAnonymous]

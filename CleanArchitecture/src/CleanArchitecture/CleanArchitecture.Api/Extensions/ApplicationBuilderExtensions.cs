@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Api.Middleware;
-using CleanArchitecture.Infraestructure;
+using CleanArchitecture.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Api.Extensions
